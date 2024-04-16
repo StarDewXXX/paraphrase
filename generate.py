@@ -51,8 +51,11 @@ def generate_paraphrases_batched(model, tokenizer, dataset, batch_size, output_f
         json.dump(paraphrases, f, indent=4)
 
 # Initialize tokenizer and model
-tokenizer = T5Tokenizer.from_pretrained("t5-small")
-model = T5ForConditionalGeneration.from_pretrained("t5-small")
+model_path = "t5"
+tokenizer = T5Tokenizer.from_pretrained(model_path)
+model = T5ForConditionalGeneration.from_pretrained(model_path)
+ckpt_path = "./ckpts/..."
+model.load_state_dict(torch.load(ckpt_path))
 
 # Load trained model weights
 model_path = "./ckpts/qqp_sft"
