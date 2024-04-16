@@ -27,8 +27,9 @@ class ParaphraseDataset(Dataset):
         return {'input':input_text,'target':target_text}
 
 # 初始化tokenizer和模型
-tokenizer = T5Tokenizer.from_pretrained("t5-small")
-model = T5ForConditionalGeneration.from_pretrained("t5-small")
+model_path = "t5"
+tokenizer = T5Tokenizer.from_pretrained(model_path)
+model = T5ForConditionalGeneration.from_pretrained(model_path)
 
 # 准备数据集
 
