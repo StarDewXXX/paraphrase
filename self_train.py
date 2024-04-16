@@ -68,9 +68,13 @@ device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 # 初始化tokenizer和模型
 model_path = "t5"
 tokenizer = T5Tokenizer.from_pretrained(model_path)
-ref_model = T5ForConditionalGeneration.from_pretrained(model_path).to(device).eva;()
-policy_model = T5ForConditionalGeneration.from_pretrained(model_path).to(device).train()
 
+policy_model = T5ForConditionalGeneration.from_pretrained(model_path).to(device)
+ckpt_path = "./ckpts/..."
+policy_model.load_state_dict(torch.load(ckpt_path))
+ref_model = copy.deepcopy(policy_model)
+policy_model.train()
+ref_model.eval()
 # 准备数据集
 
 max_length = 64
